@@ -24,9 +24,14 @@ import initSqlJs from 'sql.js';
 const require = createRequire(import.meta.url);
 
 const FILE = 'data/migaku.json';
-// Mandarin = Simplified (zh_CN) + Traditional (zh_TW). Cantonese ('yue') is excluded.
-// Override with MIGAKU_LANGS="zh_CN" (etc.) if you only want one.
-const LANGS = (process.env.MIGAKU_LANGS || 'zh_CN,zh_TW').split(',').map(s => s.trim()).filter(Boolean);
+// Which languages count as "Mandarin". Migaku's SRS DB stores short codes, so by
+// default we match anything starting with "zh" (zh, zh_CN, zh_TW, zh-CN …) and
+// exclude Cantonese ('yue'). Override with MIGAKU_LANGS="zh,zh_CN" for exact codes.
+const LANG_CODES = (process.env.MIGAKU_LANGS || '').split(',').map(s => s.trim().replace(/[^a-zA-Z0-9_-]/g, '')).filter(Boolean);
+const LANG_SQL = LANG_CODES.length
+  ? '(' + LANG_CODES.map(c => `language='${c}'`).join(' OR ') + ')'
+  : "(language LIKE 'zh%')";   // default: any Mandarin variant, not Cantonese
+const LANG_DESC = LANG_CODES.length ? LANG_CODES.join(', ') : "zh*";
 // Firebase *Web API key* — a public client identifier that ships inside Migaku's
 // own apps (NOT a secret). Overridable via env in case Migaku rotates it.
 const API_KEY = process.env.MIGAKU_API_KEY || 'AIzaSyDZvwYKYTsQoZkf3oKsfIQ4ykuy2GZAiH8';
@@ -68,24 +73,29 @@ async function downloadDb(idToken) {
 
 function countKnown(bytes, SQL) {
   const db = new SQL.Database(bytes);
+  const dump = (label, sql) => {
+    try {
+      const r = db.exec(sql);
+      console.log(label + ':');
+      if (!r.length) { console.log('    (none)'); return; }
+      for (const row of r[0].values) console.log('    ' + row.map(v => JSON.stringify(v)).join('  '));
+    } catch (e) { console.log(label + ': [error] ' + e.message); }
+  };
   try {
-    // Log a breakdown the first time so we can confirm the language codes & statuses.
-    const bk = db.exec(
-      "SELECT language, knownStatus, COUNT(*) n FROM WordList WHERE del=0 " +
-      "GROUP BY language, knownStatus ORDER BY language, knownStatus"
-    );
-    if (bk.length) {
-      console.log('WordList breakdown (language / status / count):');
-      for (const row of bk[0].values) console.log('   ', row[0], '/', row[1], '/', row[2]);
-    }
-    const placeholders = LANGS.map(() => '?').join(',');
-    const stmt = db.prepare(
-      `SELECT COUNT(*) FROM WordList WHERE knownStatus='KNOWN' AND del=0 AND language IN (${placeholders})`
-    );
-    stmt.bind(LANGS);
-    stmt.step();
-    const n = stmt.get()[0];
-    stmt.free();
+    // Full breakdown so we can confirm the real language codes / statuses / del values.
+    console.log('--- Migaku DB diagnostics ---');
+    dump('tables', "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name");
+    dump('WordList columns', "SELECT name FROM pragma_table_info('WordList')");
+    dump('WordList total rows', 'SELECT COUNT(*) FROM WordList');
+    dump('languages (all)', 'SELECT language, COUNT(*) FROM WordList GROUP BY language ORDER BY 2 DESC');
+    dump('knownStatus (all)', 'SELECT knownStatus, COUNT(*) FROM WordList GROUP BY knownStatus ORDER BY 2 DESC');
+    dump('del values', 'SELECT del, COUNT(*) FROM WordList GROUP BY del');
+    console.log('-----------------------------');
+
+    const sql = `SELECT COUNT(*) FROM WordList WHERE UPPER(knownStatus)='KNOWN' AND (del IS NULL OR del=0) AND ${LANG_SQL}`;
+    const r = db.exec(sql);
+    const n = r.length ? r[0].values[0][0] : 0;
+    console.log('filter:', LANG_SQL, '=> KNOWN count =', n);
     return n;
   } catch (e) {
     const tables = db.exec("SELECT name FROM sqlite_master WHERE type='table'");
@@ -103,7 +113,7 @@ console.log('logged in to Migaku.');
 const bytes = await downloadDb(idToken);
 console.log('downloaded SRS database:', bytes.length, 'bytes');
 const known = countKnown(bytes, SQL);
-console.log(`Mandarin known words (${LANGS.join(', ')}) =`, known);
+console.log(`Mandarin known words (${LANG_DESC}) =`, known);
 
 const data = existsSync(FILE)
   ? JSON.parse(readFileSync(FILE, 'utf8'))
