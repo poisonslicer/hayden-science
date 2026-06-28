@@ -5,3 +5,10 @@ desktop.ini
 .vscode/
 .idea/
 *.log
+
+# Node tooling for the sync scripts (installed in CI / locally, never committed)
+node_modules/
+package-lock.json
+
+# Local Migaku DB dump if you ever run the sync by hand
+migaku.db

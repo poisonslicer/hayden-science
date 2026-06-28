@@ -8,9 +8,9 @@ description: Update and deploy the hayden.science personal site (this repo). Use
 A static, no-build personal site (plain HTML/CSS/JS) deployed to **GitHub Pages**.
 
 - **Repo:** `poisonslicer/hayden-science` (remote `origin`, branch `main`)
-- **Live URL:** https://poisonslicer.github.io/hayden-science/ (served from a subpath — **use relative paths only**, never root-absolute `/...`)
+- **Live URL:** https://hayden.science (custom domain; also serves at https://poisonslicer.github.io/hayden-science/ — **use relative paths only**, never root-absolute `/...`)
 - **Local repo path:** `C:\Users\hayst\Downloads\hayden-warm-site`
-- **Auto-synced daily** by `.github/workflows/sync-stats.yml`: h-index (Google Scholar) + rapid rating (chess.com) → `data/stats.json`. Don't hand-edit these unless overriding.
+- **Auto-synced daily**: `.github/workflows/sync-stats.yml` → h-index (Google Scholar) + rapid rating (chess.com) → `data/stats.json`; `.github/workflows/sync-migaku.yml` → Mandarin words known (Migaku) → `data/migaku.json`. Don't hand-edit these unless overriding.
 
 ## File map
 | What | File |
@@ -22,7 +22,8 @@ A static, no-build personal site (plain HTML/CSS/JS) deployed to **GitHub Pages*
 | Projects gallery (modular cards) | `projects.html` + `projects.js` |
 | Project write-ups | `projects/<slug>.md` rendered by `project.html` + `md.js` |
 | **All hand-edited content** | **`config.js`** |
-| Auto-synced numbers | `data/stats.json` (via the Action) |
+| Auto-synced h-index + chess | `data/stats.json` (via `sync-stats.yml`) |
+| Auto-synced Mandarin words | `data/migaku.json` (via `sync-migaku.yml`) |
 | Homepage face image | `assets/me.png` (transparent cutout) |
 
 ## Common edits
@@ -58,6 +59,9 @@ Replace `assets/me.png` with a **transparent PNG** cutout (square-ish, head cent
 
 ### h-index / chess
 Automatic via the Action. To override manually, edit `data/stats.json` (`current` + `history` map of `YYYY-MM-DD: value`).
+
+### Mandarin words (Migaku)
+Synced daily by `sync-migaku.yml` → `scripts/sync-migaku.mjs`: logs into Migaku (Firebase email/password), downloads the SRS SQLite DB, counts `knownStatus='KNOWN'` rows for `zh_CN`/`zh_TW` → `data/migaku.json`. Needs repo **secrets** `MIGAKU_EMAIL` + `MIGAKU_PASSWORD` (Settings → Secrets and variables → Actions). Test it: `npm install` then `MIGAKU_EMAIL=… MIGAKU_PASSWORD=… node scripts/sync-migaku.mjs`. Change which languages count via `MIGAKU_LANGS` (default `zh_CN,zh_TW`). Override manually by editing `data/migaku.json`. If Migaku changes the API, the script logs a table/column breakdown to make fixes easy.
 
 ## Preview locally (REQUIRED before pushing if you touched project pages)
 Project pages and stats fetch local files, so **serve over http — `file://` won't load them**:

@@ -28,7 +28,7 @@
   <header class="page-head">
     <span class="chip">Stats</span>
     <h1 class="display">Kept in the open. <em>Tracked over time.</em></h1>
-    <p class="lede">The numbers I actually watch — citations, chess rating, books, and movies — plus the last book I read and the last thing I watched. <span class="placeholder-tag">books &amp; movies are placeholder data</span></p>
+    <p class="lede">The numbers I actually watch — citations, chess rating, books, and Mandarin words — plus the last book I read and the last thing I watched.</p>
   </header>
 
   <!-- CHARTS -->
@@ -55,10 +55,10 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-head"><h3>Movies watched</h3><span class="now" id="movies-now" style="color:var(--amber)">29</span></div>
-      <p class="chart-sub">Cumulative this year. Theaters count double in my heart.</p>
-      <div class="chart-holder" id="c-films"></div>
-      <div class="chart-foot"><span>2026, cumulative</span></div>
+      <div class="chart-head"><h3>Mandarin words</h3><span class="now" id="migaku-now" style="color:var(--amber)">—</span></div>
+      <p class="chart-sub">Total words known in Mandarin — synced from Migaku, with history.</p>
+      <div class="chart-holder" id="c-migaku"></div>
+      <div class="chart-foot"><span>Migaku · 中文</span><span class="placeholder-tag" id="migaku-status">syncing…</span></div>
     </div>
   </section>
 
@@ -84,7 +84,7 @@
           <li>h-index (live from Google Scholar)</li>
           <li>Chess rating (rapid, from chess.com)</li>
           <li>Books read, cumulative</li>
-          <li>Movies watched, cumulative</li>
+          <li>Mandarin words known (from Migaku)</li>
         </ul>
       </div>
       <div class="blk">
@@ -102,7 +102,7 @@
       <a href="projects.html">Projects →</a>
       <a href="index.html">Home →</a>
     </div>
-    <p class="signoff">The h-index (Google Scholar) and chess rating (chess.com) sync automatically at most once a day, with history kept in your browser. Books &amp; movies are placeholder data; the book/movie covers are fetched live from the title.</p>
+    <p class="signoff">The h-index (Google Scholar), chess rating (chess.com), and Mandarin words known (Migaku) sync automatically, with history kept over time. Books are tracked across the year, and every book &amp; movie cover is fetched live from its title.</p>
   </div>
 </footer>
 
@@ -112,15 +112,12 @@
 <script src="synced-stats.js"></script>
 <script src="lastmedia.js"></script>
 <script>
-  /* h-index → scholar-sync.js · chess → chess-sync.js · covers → lastmedia.js.
-     Books & movies come from config.js so there's one place to edit. */
+  /* h-index + chess + Mandarin words → synced-stats.js (from data/*.json) · covers → lastmedia.js.
+     Books come from config.js so there's one place to edit. */
   var S = window.SITE || {};
-  var books  = S.books  || { labels:['Jan','Feb','Mar','Apr','May','Jun'], values:[3,6,8,11,15,18] };
-  var movies = S.movies || { labels:['Jan','Feb','Mar','Apr','May','Jun'], values:[5,9,14,18,23,29] };
-  var bn = document.getElementById('books-now');  if (bn) bn.textContent  = books.values[books.values.length - 1];
-  var mn = document.getElementById('movies-now'); if (mn) mn.textContent = movies.values[movies.values.length - 1];
-  warmChart('c-books', { labels: books.labels,  values: books.values,  color:'#FF6F61', valueFmt:v=>v });
-  warmChart('c-films', { labels: movies.labels, values: movies.values, color:'#F2A65A', valueFmt:v=>v });
+  var books = S.books || { labels:['Jan','Feb','Mar','Apr','May','Jun'], values:[3,6,8,11,15,18] };
+  var bn = document.getElementById('books-now'); if (bn) bn.textContent = books.values[books.values.length - 1];
+  warmChart('c-books', { labels: books.labels, values: books.values, color:'#FF6F61', valueFmt:v=>v });
 </script>
 </body>
 </html>

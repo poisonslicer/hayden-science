@@ -14,7 +14,7 @@ window.SITE = {
   lastMovie: { title: 'Erased',         kind: 'anime', note: 'Boku dake ga Inai Machi' },
   prevMovie: { title: 'Shutter Island', kind: 'movie', note: '2010' },
 
-  // Cumulative counts this year — the last number shows as the big figure.
-  books:  { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], values: [3, 6, 8, 11, 15, 18] },
-  movies: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], values: [5, 9, 14, 18, 23, 29] }
+  // Cumulative books read this year — the last number shows as the big figure.
+  // (Mandarin words known sync from Migaku → data/migaku.json; h-index + chess → data/stats.json.)
+  books:  { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], values: [3, 6, 8, 11, 15, 18] }
 };

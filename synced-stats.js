@@ -11,6 +11,15 @@
     })
     .catch(() => { setText('hindex-status', 'offline'); setText('elo-status', 'offline'); });
 
+  // Mandarin words known — synced from Migaku into its own file (written by the
+  // local sync task, kept separate from stats.json so the two never clobber each other).
+  if (document.getElementById('c-migaku')) {
+    fetch('data/migaku.json', { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(m => renderMetric('c-migaku', 'migaku-now', 'migaku-status', m, '#F2A65A', ['Feb', 'Mar', 'Apr', 'May', 'Jun']))
+      .catch(() => setText('migaku-status', 'offline'));
+  }
+
   function renderMetric(chartId, nowId, statusId, m, color, fbLabels) {
     if (!m) return;
     const hist = m.history || {};

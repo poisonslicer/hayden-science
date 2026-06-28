@@ -1,0 +1,35 @@
+name: Sync Migaku words
+
+# Logs into Migaku, counts Mandarin words marked KNOWN, and writes the count
+# (with history) to data/migaku.json — that commit triggers the Pages redeploy.
+# Needs repo secrets MIGAKU_EMAIL and MIGAKU_PASSWORD.
+on:
+  schedule:
+    - cron: '37 8 * * *'   # ~08:37 UTC daily (offset from the stats sync at :17)
+  workflow_dispatch:        # run manually from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps (sql.js)
+        run: npm install
+      - name: Fetch Migaku known-word count
+        env:
+          MIGAKU_EMAIL: ${{ secrets.MIGAKU_EMAIL }}
+          MIGAKU_PASSWORD: ${{ secrets.MIGAKU_PASSWORD }}
+        run: node scripts/sync-migaku.mjs
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/migaku.json
+          git diff --quiet --cached || git commit -m "chore: daily Migaku words sync"
+          git push

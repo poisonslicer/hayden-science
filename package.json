@@ -1,0 +1,8 @@
+{
+  "name": "hayden-science",
+  "private": true,
+  "description": "Tooling for the hayden.science static site — daily stat syncs (run by GitHub Actions).",
+  "dependencies": {
+    "sql.js": "^1.10.3"
+  }
+}
