@@ -89,7 +89,7 @@
         </defs>
         ${grid}
         <path d="${area}" fill="url(#${gid})"/>
-        <path d="${line}" fill="none" stroke="${color}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="spark" d="${line}" fill="none" stroke="${color}" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
         ${dots}
         ${xlabels}
         ${bubble}

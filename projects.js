@@ -49,7 +49,7 @@ const PROJECTS = [
     bookTitle: 'The Last Good Petri Dish',
     byline: 'by Hayden Stegall',
     title: 'The Last Good Petri Dish',
-    blurb: 'A near-future short about a grad student, a contaminated incubator, and the colony that refused to die. (placeholder)',
+    blurb: 'A near-future short about a grad student, a contaminated incubator, and the colony that refused to die.',
     tags: ['fiction', 'sci-fi']
   },
   {
@@ -81,7 +81,7 @@ const PROJECTS = [
     bookTitle: 'Blindfold',
     byline: 'by Hayden Stegall',
     title: 'Blindfold',
-    blurb: 'Two players, one board nobody can see, and a single move that takes thirty years to land. (placeholder)',
+    blurb: 'Two players, one board nobody can see, and a single move that takes thirty years to land.',
     tags: ['fiction', 'chess']
   },
   {

@@ -229,6 +229,7 @@ h2.big{font-size:clamp(1.8rem,4vw,2.7rem);max-width:22ch;font-weight:900;font-fa
   border:1px solid rgba(255,255,255,.55);box-shadow:0 2px 6px rgba(0,0,0,.16);z-index:9}
 .frame .photo{width:100%;height:100%;display:block;border-radius:3px;overflow:hidden;background:#eadfce}
 .frame .photo svg{width:100%;height:100%;display:block}
+.frame .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 16%;display:block}
 .frame .cap{position:absolute;left:0;right:0;bottom:11px;text-align:center;font-family:'Fraunces';font-weight:700;
   font-size:.82rem;color:var(--plum)}
 .frame.f1{width:224px;height:272px;left:1%;top:30px;transform:rotate(-6deg);z-index:3}
@@ -409,4 +410,142 @@ h2.big{font-size:clamp(1.8rem,4vw,2.7rem);max-width:22ch;font-weight:900;font-fa
   .mascot{max-width:230px;margin-bottom:10px}
   .collage{height:520px;max-width:460px;margin:0 auto}
 }
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto;animation:none!important}}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto;animation:none!important}
+  .reveal-ready .reveal{opacity:1!important;transform:none!important}
+}
+
+/* ============================================================
+   DECORATIONS & MOTION  (shared, all pages)
+   Everything here is opt-in via a class or a JS-injected layer,
+   and fully neutralized by the prefers-reduced-motion block above.
+   ============================================================ */
+
+/* ---- scroll reveal ----
+   Gated by .reveal-ready (added to <body> by shared.js). With JS off,
+   nothing is hidden; with reduced motion, reveals are forced visible. */
+.reveal-ready .reveal{opacity:0;transform:translateY(26px);
+  transition:opacity .72s cubic-bezier(.2,.7,.2,1),transform .72s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+.reveal-ready .reveal.in{opacity:1;transform:none}
+.reveal-ready .reveal.pop{transform:translateY(20px) scale(.95)}
+.reveal-ready .reveal.pop.in{transform:none}
+.reveal-ready .reveal.r-d1{transition-delay:.07s}
+.reveal-ready .reveal.r-d2{transition-delay:.14s}
+.reveal-ready .reveal.r-d3{transition-delay:.21s}
+.reveal-ready .reveal.r-d4{transition-delay:.28s}
+.reveal-ready .reveal.r-d5{transition-delay:.35s}
+
+/* ---- floating decorative layer (injected by shared.js) ---- */
+.decor{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.decor>*{position:absolute;will-change:transform;opacity:.9}
+.decor svg{display:block;width:100%;height:100%;overflow:visible}
+.decor .blob{border-radius:50%;filter:blur(26px);opacity:.5}
+.d-spin{animation:dSpin 32s linear infinite}
+.d-spin.rev{animation-direction:reverse}
+.d-float{animation:dFloat 7s ease-in-out infinite}
+.d-float.s{animation-duration:9.5s}
+.d-float.f{animation-duration:5.5s}
+.d-bob{animation:dBob 6s ease-in-out infinite}
+.d-tw{animation:dTwinkle 3.6s ease-in-out infinite}
+.d-drift{animation:dDrift 16s ease-in-out infinite}
+@keyframes dSpin{to{transform:rotate(360deg)}}
+@keyframes dFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes dBob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-13px) rotate(4deg)}}
+@keyframes dTwinkle{0%,100%{opacity:.2;transform:scale(.75)}50%{opacity:1;transform:scale(1.18)}}
+@keyframes dDrift{0%,100%{transform:translate(0,0)}33%{transform:translate(16px,-12px)}66%{transform:translate(-12px,10px)}}
+
+/* keep page content above the decor layer */
+.cover .wrap,.site-foot .wrap,.about-hero .wrap,.page-head{position:relative;z-index:2}
+
+/* ---- edge wave (dark panel → paper) ---- */
+.edge-wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:52px;z-index:4;pointer-events:none}
+.edge-wave path{fill:var(--paper)}
+.cover .edge-wave path{fill:var(--plum)}   /* flows the dark cover into the plum ticker below */
+.cover{padding-bottom:0}
+
+/* ---- interest marquee ---- */
+.marquee{position:relative;overflow:hidden;background:var(--plum);color:var(--paper);
+  border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.marquee::before,.marquee::after{content:"";position:absolute;top:0;bottom:0;width:64px;z-index:2;pointer-events:none}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--plum),transparent)}
+.marquee::after{right:0;background:linear-gradient(270deg,var(--plum),transparent)}
+.marquee .track{display:flex;width:max-content;align-items:center;animation:marq 34s linear infinite;padding:12px 0}
+.marquee:hover .track{animation-play-state:paused}
+.marquee .track b{font-family:'Fraunces';font-weight:800;font-size:1.05rem;letter-spacing:.01em;
+  white-space:nowrap;padding:0 4px}
+.marquee .track i{color:var(--amber);font-style:normal;padding:0 22px;font-size:1.1rem}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---- universal hover-lift on cards ---- */
+a.post{text-decoration:none;color:inherit;cursor:pointer}
+a.post:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+.card,.post,.chart-card,.mail,.receipt,.media-card,.legend span{transition:transform .2s ease,box-shadow .2s ease}
+.card:hover,.post:hover,.chart-card:hover{transform:translate(-3px,-4px)}
+.mail:hover{transform:translateX(4px)}
+.receipt:hover{transform:rotate(-1deg) translateY(-3px)}
+.legend span:hover{transform:translateY(-2px)}
+.enemy{transition:transform .2s ease}
+.enemy:hover{transform:translateY(-3px)}
+
+/* ---- button sheen ---- */
+.cta{position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;top:0;left:-160%;width:55%;height:100%;
+  background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-18deg);animation:sheen 5s ease-in-out infinite}
+.cta.ghost::after{background:linear-gradient(110deg,transparent,rgba(110,58,125,.18),transparent)}
+@keyframes sheen{0%,55%{left:-160%}78%,100%{left:170%}}
+
+/* ---- shimmering accent headings ---- */
+.cover h1 em,.about-copy h1 em,.page-head h1 em{
+  background:linear-gradient(95deg,var(--coral),var(--amber) 35%,var(--berry) 70%,var(--coral));
+  background-size:280% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;animation:shimmer 9s linear infinite}
+.about-copy h1 em{background-image:linear-gradient(95deg,var(--teal),#7DE0C2 40%,var(--amber) 80%,var(--teal))}
+@keyframes shimmer{to{background-position:280% 0}}
+
+/* ---- nav flourishes ---- */
+.brand svg{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.brand:hover svg{transform:rotate(180deg) scale(1.08)}
+.nav-links a{position:relative}
+.nav-links a:not(.active)::after{content:"";position:absolute;left:14px;right:14px;bottom:3px;height:2px;
+  background:var(--coral);border-radius:2px;transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.nav-links a:not(.active):hover::after{transform:scaleX(1)}
+
+/* ---- chip wobble ---- */
+.chip{transition:transform .18s ease}
+.chip:hover{transform:rotate(2deg) scale(1.04)}
+
+/* ---- home hero: face bob + glow pulse ---- */
+.me-atom .me-face img{animation:faceBob 6.5s ease-in-out infinite}
+.me-atom .me-face::before{animation:glowPulse 4.4s ease-in-out infinite}
+@keyframes faceBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes glowPulse{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.14)}}
+.name-tape{transition:transform .2s ease}
+.mascot:hover .name-tape{transform:translateX(-50%) rotate(-2deg) scale(1.06)}
+
+/* ---- about: float the hero orbs + twinkle sparkles, tilt frames ---- */
+.about-hero .orb.o1{animation:dFloat 8.5s ease-in-out infinite}
+.about-hero .orb.o2{animation:dFloat 6.2s ease-in-out infinite}
+.sparkle{animation:dTwinkle 3.2s ease-in-out infinite}
+.sparkle:nth-of-type(2){animation-delay:.7s}
+.sparkle:nth-of-type(3){animation-delay:1.3s}
+.frame{transition:transform .26s cubic-bezier(.2,.7,.2,1),box-shadow .26s ease}
+.frame:hover{transform:scale(1.06) rotate(0deg)!important;z-index:9;box-shadow:0 24px 46px rgba(0,0,0,.42)}
+
+/* ---- chart line draws itself in ---- */
+.chart-holder .spark,.case-holder .spark{stroke-dasharray:1600;stroke-dashoffset:1600;
+  animation:draw 1.9s cubic-bezier(.4,.08,.2,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---- project module inner motion on hover ---- */
+.module:hover{box-shadow:11px 12px 0 rgba(42,30,44,.16)}
+.module.code:hover{box-shadow:11px 12px 0 var(--teal)}
+.module.story:hover{box-shadow:11px 12px 0 var(--berry)}
+.module.life:hover{box-shadow:11px 12px 0 var(--amber)}
+.module.story:hover .book{animation-duration:2.6s}
+.module.life:hover .g-blades{animation-duration:1.8s}
+
+/* ---- dotted-divider gets a tiny pulse marker ---- */
+section.band{position:relative}
+section.band+section.band::before{content:"✦";position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  color:var(--amber);font-size:1rem;background:var(--paper);padding:0 10px;animation:dTwinkle 4s ease-in-out infinite}
