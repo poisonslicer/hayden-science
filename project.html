@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project | hayden.science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span data-atom-mini></span><span>hayden<span class="dot">.</span>science</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="stats.html">Stats</a>
+      <a href="projects.html" class="active">Projects</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="page-head">
+    <a class="backlink" href="projects.html">← All projects</a>
+    <div><span class="chip" id="p-kicker">Project</span></div>
+    <h1 class="display" id="p-title">Loading…</h1>
+    <div class="m-tags" id="p-tags" style="margin-top:14px"></div>
+  </header>
+
+  <article class="bio" id="p-body" style="padding:10px 0 64px"></article>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="chip">Projects · hayden.science</span>
+    <h2>Every project is just a Markdown file.</h2>
+    <p class="signoff">This write-up is rendered from a plain <span class="mono">.md</span> file in <span class="mono">/projects</span>, styled to match the site. Add a file, list it in <span class="mono">projects.js</span>, and it gets its own page.</p>
+    <div class="foot-links">
+      <a href="projects.html">← Back to projects</a>
+      <a href="index.html">Home →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script src="projects.js"></script>
+<script src="md.js"></script>
+<script>
+(function () {
+  const slug = (new URLSearchParams(location.search).get('p') || '').replace(/[^a-z0-9\-]/gi, '');
+  const KICK = { code: 'Code', story: 'Short story', life: 'In real life' };
+  const meta = (typeof PROJECTS !== 'undefined') ? PROJECTS.find(p => p.slug === slug) : null;
+
+  if (meta) {
+    document.getElementById('p-kicker').textContent = KICK[meta.type] || 'Project';
+    document.getElementById('p-title').textContent = meta.title;
+    document.title = meta.title + ' | hayden.science';
+    document.getElementById('p-tags').innerHTML = (meta.tags || []).map(t => `<span>${t}</span>`).join('');
+  }
+  if (!slug) { document.getElementById('p-body').innerHTML = '<p>No project selected.</p>'; return; }
+
+  fetch('projects/' + slug + '.md')
+    .then(r => r.ok ? r.text() : Promise.reject(r.status))
+    .then(md => {
+      document.getElementById('p-body').innerHTML = renderMarkdown(md);
+      const firstH1 = document.querySelector('#p-body h1');
+      if (firstH1) {
+        if (!meta) { document.getElementById('p-title').textContent = firstH1.textContent; document.title = firstH1.textContent + ' | hayden.science'; }
+        firstH1.remove();
+      }
+    })
+    .catch(() => {
+      if (!meta) document.getElementById('p-title').textContent = 'Project not found';
+      document.getElementById('p-body').innerHTML =
+        '<p>Couldn’t load this write-up. If you opened the page as a local <code>file://</code>, view it through a server instead — the deployed site loads it fine.</p>';
+    });
+})();
+</script>
+</body>
+</html>

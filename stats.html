@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stats | hayden.science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html"><span data-atom-mini></span><span>hayden<span class="dot">.</span>science</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="stats.html" class="active">Stats</a>
+      <a href="projects.html">Projects</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="page-head">
+    <span class="chip">Stats</span>
+    <h1 class="display">Kept in the open. <em>Tracked over time.</em></h1>
+    <p class="lede">The numbers I actually watch — citations, chess rating, books, and movies — plus the last book I read and the last thing I watched. <span class="placeholder-tag">books &amp; movies are placeholder data</span></p>
+  </header>
+
+  <!-- CHARTS -->
+  <section class="stats-grid">
+    <div class="chart-card">
+      <div class="chart-head"><h3>h-index</h3><span class="now" id="hindex-now" style="color:var(--plum)">1</span></div>
+      <p class="chart-sub">Live from Google Scholar — checked at most once a day, with history.</p>
+      <div class="chart-holder" id="c-hindex"></div>
+      <div class="chart-foot"><span>Hayden Stegall · Scholar</span><span class="placeholder-tag" id="hindex-status">syncing…</span></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>Chess rating</h3><span class="now" id="elo-now" style="color:var(--teal)">1421</span></div>
+      <p class="chart-sub">Rapid on chess.com — synced once a day, with history.</p>
+      <div class="chart-holder" id="c-elo"></div>
+      <div class="chart-foot"><span>poisonslicer · rapid</span><span class="placeholder-tag" id="elo-status">syncing…</span></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>Books read</h3><span class="now" id="books-now" style="color:var(--coral)">18</span></div>
+      <p class="chart-sub">Cumulative this year. Fiction, science, the occasional reread.</p>
+      <div class="chart-holder" id="c-books"></div>
+      <div class="chart-foot"><span>2026, cumulative</span></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-head"><h3>Movies watched</h3><span class="now" id="movies-now" style="color:var(--amber)">29</span></div>
+      <p class="chart-sub">Cumulative this year. Theaters count double in my heart.</p>
+      <div class="chart-holder" id="c-films"></div>
+      <div class="chart-foot"><span>2026, cumulative</span></div>
+    </div>
+  </section>
+
+  <!-- RECENTLY READ / WATCHED — rendered from config.js; covers auto-fetched by title -->
+  <section class="case-wrap lastmedia">
+    <div class="case-head">
+      <h3>📚 Recently read &amp; watched</h3>
+      <p>The last two of each — covers are pulled in automatically from the title.</p>
+    </div>
+    <div class="media-grid" id="media-grid"></div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="chip">Stats · hayden.science</span>
+    <h2>Four things worth measuring, kept honest over time.</h2>
+    <div class="nxt">
+      <div class="blk">
+        <h4>Graphed &amp; auto-synced</h4>
+        <ul>
+          <li>h-index (live from Google Scholar)</li>
+          <li>Chess rating (rapid, from chess.com)</li>
+          <li>Books read, cumulative</li>
+          <li>Movies watched, cumulative</li>
+        </ul>
+      </div>
+      <div class="blk">
+        <h4>On display instead</h4>
+        <ul>
+          <li>Last book I finished</li>
+          <li>Last thing I watched</li>
+          <li>Covers fetched automatically by title</li>
+          <li>Hands-off — just edit the title</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-links">
+      <a href="about.html">About →</a>
+      <a href="projects.html">Projects →</a>
+      <a href="index.html">Home →</a>
+    </div>
+    <p class="signoff">The h-index (Google Scholar) and chess rating (chess.com) sync automatically at most once a day, with history kept in your browser. Books &amp; movies are placeholder data; the book/movie covers are fetched live from the title.</p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="shared.js"></script>
+<script src="charts.js"></script>
+<script src="scholar-sync.js"></script>
+<script src="chess-sync.js"></script>
+<script src="lastmedia.js"></script>
+<script>
+  /* h-index → scholar-sync.js · chess → chess-sync.js · covers → lastmedia.js.
+     Books & movies come from config.js so there's one place to edit. */
+  var S = window.SITE || {};
+  var books  = S.books  || { labels:['Jan','Feb','Mar','Apr','May','Jun'], values:[3,6,8,11,15,18] };
+  var movies = S.movies || { labels:['Jan','Feb','Mar','Apr','May','Jun'], values:[5,9,14,18,23,29] };
+  var bn = document.getElementById('books-now');  if (bn) bn.textContent  = books.values[books.values.length - 1];
+  var mn = document.getElementById('movies-now'); if (mn) mn.textContent = movies.values[movies.values.length - 1];
+  warmChart('c-books', { labels: books.labels,  values: books.values,  color:'#FF6F61', valueFmt:v=>v });
+  warmChart('c-films', { labels: movies.labels, values: movies.values, color:'#F2A65A', valueFmt:v=>v });
+</script>
+</body>
+</html>
