@@ -7,8 +7,8 @@
    ============================================================ */
 window.SITE = {
   // Books — most recent first. Covers auto-fetched (Open Library) by title.
-  lastBook: { title: 'Steelheart',  author: 'Brandon Sanderson' },
-  prevBook: { title: 'Animal Farm', author: 'George Orwell' },
+  lastBook: { title: 'Partials',    author: 'Dan Wells' },
+  prevBook: { title: 'Steelheart',  author: 'Brandon Sanderson' },
 
   // Watched — kind: 'anime' (MyAnimeList/Kitsu) or 'movie' (Wikipedia/iTunes).
   lastMovie: { title: 'Erased',         kind: 'anime', note: 'Boku dake ga Inai Machi' },
