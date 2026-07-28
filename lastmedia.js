@@ -110,7 +110,7 @@
   jobs.forEach(async ([id, item, isBook]) => {
     const key = (isBook ? 'book:' : 'screen:') + item.title;
     try {
-      let url = cache[key];
+      let url = item.imageUrl || cache[key];
       if (!url) {
         url = isBook ? await bookCover(item.title, item.author) : await screenCover(item.title, item.kind);
         if (url) { cache[key] = url; save(cache); }
