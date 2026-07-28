@@ -11,7 +11,11 @@ window.SITE = {
   prevBook: { title: 'Partials',             author: 'Dan Wells' },
 
   // Watched — kind: 'anime' (MyAnimeList/Kitsu) or 'movie' (Wikipedia/iTunes).
-  lastMovie: { title: 'The Sheep Detective', kind: 'movie' },
+  lastMovie: {
+    title: 'The Sheep Detectives',
+    kind: 'movie',
+    imageUrl: 'assets/the-sheep-detectives-cover.png'
+  },
   prevMovie: { title: 'Erased',              kind: 'anime', note: 'Boku dake ga Inai Machi' },
 
   // Cumulative books read this year — the last number shows as the big figure.
