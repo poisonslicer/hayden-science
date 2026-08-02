@@ -282,7 +282,15 @@ h2.big{font-size:clamp(1.8rem,4vw,2.7rem);max-width:22ch;font-weight:900;font-fa
 .chart-head h3{font-family:'Fraunces';font-weight:800;font-size:1.25rem}
 .chart-head .now{font-family:'Fraunces';font-weight:900;font-size:1.5rem}
 .chart-sub{font-size:.86rem;color:var(--grey);margin-bottom:10px}
-.chart-holder svg{width:100%;height:auto;display:block}
+.chart-holder{position:relative}
+.chart-holder svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-point{outline:none;cursor:crosshair}
+.chart-point:focus-within circle:not(.chart-hit),.chart-point:hover circle:not(.chart-hit){filter:brightness(.9)}
+.chart-tooltip{position:absolute;z-index:2;min-width:112px;max-width:180px;padding:7px 10px;background:var(--ink);border:2px solid var(--amber);border-radius:9px;box-shadow:3px 3px 0 var(--plum);color:#fff;transform:translate(-50%,-100%);pointer-events:none;font-family:'Courier Prime',monospace;font-size:.7rem;line-height:1.25;text-align:center}
+.chart-tooltip[data-side="start"]{transform:translate(0,-100%)}
+.chart-tooltip[data-side="end"]{transform:translate(-100%,-100%)}
+.chart-tooltip span{display:block;color:#f4d8a1;white-space:nowrap}
+.chart-tooltip strong{display:block;margin-top:2px;font-family:'Fraunces';font-size:1rem;color:#fff}
 .chart-foot{display:flex;justify-content:space-between;font-family:'Courier Prime',monospace;font-size:.74rem;color:var(--grey);margin-top:4px}
 .placeholder-tag{font-family:'Courier Prime',monospace;font-size:.7rem;color:#fff;background:var(--plum);
   border-radius:20px;padding:2px 9px;letter-spacing:.04em}

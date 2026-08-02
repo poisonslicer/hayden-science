@@ -24,19 +24,21 @@
     if (!m) return;
     const hist = m.history || {};
     const dates = Object.keys(hist).sort();
-    let labels, values, current;
+    let labels, values, chartDates, current;
     if (dates.length >= 2) {
       labels = dates.map(d => d.slice(5));
+      chartDates = dates;
       values = dates.map(d => hist[d]);
       current = values[values.length - 1];
     } else {
       current = (m.current != null) ? m.current : (dates.length ? hist[dates[0]] : 0);
       labels = fbLabels.concat(['now']);
+      chartDates = labels;
       values = rampTo(current, labels.length);
     }
     setText(nowId, current);
     setText(statusId, m.updated ? ('synced ' + m.updated) : 'auto-synced daily');
-    if (window.warmChart) warmChart(chartId, { labels, values, color, valueFmt: v => v });
+    if (window.warmChart) warmChart(chartId, { labels, dates: chartDates, values, color, valueFmt: v => v });
   }
 
   function rampTo(c, n) {

@@ -12,9 +12,9 @@ window.SITE = {
 
   // Watched — kind: 'anime' (MyAnimeList/Kitsu) or 'movie' (Wikipedia/iTunes).
   lastMovie: {
-    title: 'The Sheep Detectives',
+    title: 'Kingsman: The Golden Circle',
     kind: 'movie',
-    imageUrl: 'assets/the-sheep-detectives-cover.png'
+    note: 'Kingsman 2'
   },
   prevMovie: { title: 'Erased',              kind: 'anime', note: 'Boku dake ga Inai Machi' },
 
