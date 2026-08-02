@@ -26,7 +26,7 @@
     const dates = Object.keys(hist).sort();
     let labels, values, chartDates, current;
     if (dates.length >= 2) {
-      labels = dates.map(d => d.slice(5));
+      labels = dates.map(shortDate);
       chartDates = dates;
       values = dates.map(d => hist[d]);
       current = values[values.length - 1];
@@ -49,4 +49,9 @@
     return arr;
   }
   function setText(id, t) { const e = document.getElementById(id); if (e) e.textContent = t; }
+  function shortDate(value) {
+    const parts = String(value).split('-');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return parts.length === 3 ? `${months[Number(parts[1]) - 1]} ${Number(parts[2])}` : value;
+  }
 })();

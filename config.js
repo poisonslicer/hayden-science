@@ -16,7 +16,11 @@ window.SITE = {
     kind: 'movie',
     note: 'Kingsman 2'
   },
-  prevMovie: { title: 'Erased',              kind: 'anime', note: 'Boku dake ga Inai Machi' },
+  prevMovie: {
+    title: 'The Sheep Detectives',
+    kind: 'movie',
+    imageUrl: 'assets/the-sheep-detectives-cover.png'
+  },
 
   // Cumulative books read this year — the last number shows as the big figure.
   // (Mandarin words known sync from Migaku → data/migaku.json; h-index + chess → data/stats.json.)
