@@ -65,6 +65,19 @@ a{color:inherit}
 .nav-links a:hover{background:#fff;border-color:var(--ink);box-shadow:2px 2px 0 var(--ink);transform:translate(-1px,-1px)}
 .nav-links a.active{background:var(--coral);color:#fff;border-color:var(--ink);box-shadow:2px 2px 0 var(--ink)}
 
+/* ---------- HOME PRESENTATION MODE ---------- */
+.home-presentation .marquee,.home-presentation .band{display:none}
+.home-next{padding:38px 0 68px}
+.home-next-card{display:flex;align-items:center;justify-content:space-between;gap:28px;background:#fff;border:2px solid var(--ink);border-radius:18px;padding:25px 28px;box-shadow:8px 8px 0 var(--teal)}
+.home-next-copy .chip{margin-bottom:10px}
+.home-next-copy h2{font-family:'Fraunces';font-weight:900;font-size:clamp(1.8rem,3.5vw,2.55rem);line-height:1}
+.home-next-links{display:flex;gap:12px;flex-wrap:wrap}
+.home-next-link{min-width:168px;padding:13px 16px;border:2px solid var(--ink);border-radius:13px;text-decoration:none;color:var(--ink);background:var(--paper);box-shadow:3px 3px 0 var(--ink);transition:transform .16s,box-shadow .16s}
+.home-next-link.about{background:#f6e8f2}.home-next-link.stats{background:#e2f4f0}
+.home-next-link:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.home-next-link span{display:block;font-family:'Courier Prime',monospace;font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--plum);margin-bottom:2px}
+.home-next-link strong{font-family:'Fraunces';font-size:1rem}.home-next-link b{color:var(--coral)}
+
 /* ---------- PAGE HEADER (inner pages) ---------- */
 .page-head{padding:54px 0 8px}
 .page-head .chip{margin-bottom:16px}
@@ -441,6 +454,10 @@ h2.big{font-size:clamp(1.8rem,4vw,2.7rem);max-width:22ch;font-weight:900;font-fa
   .screen-cover.sm{width:94px;height:134px}
   .site-foot .wrap{flex-direction:column;align-items:flex-start;gap:10px}
   .foot-links{gap:12px}
+  .home-next{padding:28px 0 48px}
+  .home-next-card{align-items:flex-start;flex-direction:column;gap:18px;padding:21px 20px}
+  .home-next-links{width:100%;flex-direction:column}
+  .home-next-link{width:100%}
 }
 @media(max-width:360px){
   .nav-in{justify-content:center}
