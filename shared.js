@@ -101,13 +101,6 @@
     { cls: 'd-float s', css: 'width:54px;height:14px;bottom:6px;right:14%', html: sqgSVG('rgba(67,185,178,.6)') }
   ]));
 
-  // footers (dark)
-  document.querySelectorAll('.site-foot').forEach(f => deco(f, [
-    { cls: 'blob d-drift', css: 'width:240px;height:240px;background:radial-gradient(circle,#FF6F61,transparent 70%);bottom:-80px;right:-30px;opacity:.4' },
-    { cls: 'd-spin rev', css: 'width:78px;height:78px;top:30px;right:7%', html: atomSVG('rgba(243,231,214,.3)') },
-    { cls: 'd-tw', css: 'width:20px;height:20px;top:60%;left:4%', html: sparkSVG('#FFCF6B') }
-  ]));
-
   // --- scroll reveal ---
   const body = document.body;
   body.classList.add('reveal-ready');
@@ -117,7 +110,7 @@
     '.chart-card', '.case-wrap', '.lastmedia .media-card',
     '.proj-grid .module', '.legend',
     '.bio > p', '.bio > h2', '.bio > blockquote', '.bio > ul',
-    '.site-foot h2', '.site-foot .blk', '.foot-links', '.signoff'
+    '.foot-links'
   ];
   const targets = [];
   SEL.forEach(sel => {

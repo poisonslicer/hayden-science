@@ -53,13 +53,8 @@
     ticks.forEach(tick => {
       const gy = y(tick);
       const tickLabel = String(axisFmt(tick));
-      const badgeWidth = Math.max(28, 12 + tickLabel.length * 6.4);
-      const badgeX = padL - badgeWidth - 10;
       grid += `<line class="chart-gridline" x1="${padL}" y1="${gy.toFixed(1)}" x2="${W - padR}" y2="${gy.toFixed(1)}"/>`;
-      grid += `<g class="chart-y-tick">
-        <rect x="${badgeX.toFixed(1)}" y="${(gy - 9).toFixed(1)}" width="${badgeWidth.toFixed(1)}" height="18" rx="9" style="--chart-color:${color}"/>
-        <text x="${(badgeX + badgeWidth / 2).toFixed(1)}" y="${(gy + 3.5).toFixed(1)}" text-anchor="middle">${esc(tickLabel)}</text>
-      </g>`;
+      grid += `<text class="chart-y-tick" x="${(padL - 11).toFixed(1)}" y="${(gy + 4.5).toFixed(1)}" text-anchor="end">${esc(tickLabel)}</text>`;
     });
     grid += `<line class="chart-baseline" x1="${padL}" y1="${baseY}" x2="${W - padR}" y2="${baseY}"/>`;
 
