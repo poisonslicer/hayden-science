@@ -11,16 +11,8 @@ window.SITE = {
   prevBook: { title: 'Partials',             author: 'Dan Wells' },
 
   // Watched — kind: 'anime' (MyAnimeList/Kitsu) or 'movie' (Wikipedia/iTunes).
-  lastMovie: {
-    title: 'Kingsman: The Golden Circle',
-    kind: 'movie',
-    note: 'Kingsman 2'
-  },
-  prevMovie: {
-    title: 'The Sheep Detectives',
-    kind: 'movie',
-    imageUrl: 'assets/the-sheep-detectives-cover.png'
-  },
+  lastMovie: { title: 'Spider-Man: Brand New Day', kind: 'movie' },
+  prevMovie: { title: 'The Odyssey', kind: 'movie' },
 
   // Cumulative books read this year — the last number shows as the big figure.
   // (Mandarin words known sync from Migaku → data/migaku.json; h-index + chess → data/stats.json.)
