@@ -1,0 +1,197 @@
+/* Keep the original layout and artwork while sharing the app's palette.
+   The recovered Bootstrap and Mailler styles remain untouched. */
+:root {
+  --meal-green: #275c3f;
+  --meal-green-dark: #254e35;
+  --meal-orange: #e79b5a;
+  --meal-cream: #fbfaf6;
+  --meal-ink: #20392f;
+  --meal-muted: #52675b;
+  --meal-soft-green: #eaf1e4;
+  --bs-primary: var(--meal-green);
+  --bs-primary-rgb: 39, 92, 63;
+  --bs-secondary: #8a542e;
+  --bs-secondary-rgb: 138, 84, 46;
+  --bs-dark: var(--meal-ink);
+  --bs-dark-rgb: 32, 57, 47;
+  --bs-light: #f1f5ed;
+  --bs-light-rgb: 241, 245, 237;
+  --bs-body-color: var(--meal-muted);
+  --bs-body-bg: var(--meal-cream);
+}
+
+body { color: var(--meal-muted); background: var(--meal-cream); }
+a { text-underline-offset: .2em; }
+a:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--meal-orange);
+  outline-offset: 5px;
+}
+#main:focus { outline: none; }
+[id] { scroll-margin-top: 1.5rem; }
+.skip-link {
+  position: fixed;
+  inset: .5rem auto auto .5rem;
+  z-index: 1000;
+  padding: .8rem 1.2rem;
+  color: #fff;
+  background: var(--meal-green);
+  border-radius: 10px;
+  transform: translateY(-160%);
+}
+.skip-link:focus { color: #fff; transform: translateY(0); }
+
+.landing-bar {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 0;
+  border-bottom: 1px solid #dce6d5;
+  background: var(--meal-cream);
+}
+.landing-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .65rem;
+  color: var(--meal-ink);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+}
+.landing-brand:hover { color: var(--meal-green); }
+.landing-app-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 44px;
+  flex-shrink: 0;
+  color: var(--meal-green);
+  font-size: .9rem;
+}
+.landing-app-link:hover { color: var(--meal-green-dark); text-decoration: underline; }
+
+/* Dark green keeps small links and primary actions legible on cream. */
+.text-primary { color: var(--meal-green) !important; }
+.text-secondary { color: var(--bs-secondary) !important; }
+.btn.btn-primary {
+  background: var(--meal-green) !important;
+  border-color: var(--meal-green);
+}
+.btn.btn-primary:hover {
+  background: var(--meal-green-dark) !important;
+  color: #fff !important;
+  border-color: var(--meal-green-dark);
+}
+.btn.btn-light { color: var(--meal-green) !important; }
+.btn.btn-light:hover {
+  background: var(--meal-green) !important;
+  color: #fff !important;
+}
+.btn { min-height: 44px; }
+
+.header { isolation: isolate; }
+.header::before { border-color: #e79b5a1a; }
+.header::after { background: var(--meal-soft-green); }
+.hero-header {
+  margin-top: 0 !important;
+  padding-top: 110px;
+  padding-bottom: 90px;
+}
+.hero-header > .row { max-width: 1440px; margin-inline: auto; }
+.hero-header::before { border-color: #275c3f0d; }
+.hero-header .rotate-img { pointer-events: none; }
+.hero-header .rotate-img .rotate-sty-2 { border-color: #e79b5a40; }
+.hero-header .fs-4 { max-width: 620px; }
+.guest-note { color: var(--meal-muted); font-size: .9rem; line-height: 1.6; }
+.section-intro { max-width: 900px; }
+.section-label { font-size: 1.25rem; font-weight: 500; }
+.offer { margin-top: 2rem; }
+.service .service-item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.service .service-item:hover { background: var(--meal-soft-green); }
+.service-icon svg { display: block; width: 4rem; height: 4rem; fill: var(--meal-green); }
+.service-item > .service-icon { align-self: center; }
+.service-content { display: flex; flex-direction: column; flex: 1; }
+.service-content a { align-self: center; margin-top: auto; }
+
+/* Native details keeps the original accordion look and works without JS. */
+.FAQ summary.accordion-button {
+  color: var(--meal-ink);
+  background: #fff;
+  list-style: none;
+  cursor: pointer;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: none;
+  gap: 1rem;
+}
+.FAQ summary::-webkit-details-marker { display: none; }
+.FAQ summary.accordion-button::after {
+  width: .65rem;
+  height: .65rem;
+  margin-right: .25rem;
+  background: none;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+}
+.FAQ details[open] summary {
+  color: var(--meal-green-dark);
+  background: var(--meal-soft-green);
+}
+.FAQ details[open] summary::after { transform: rotate(225deg); }
+.FAQ .accordion-body { line-height: 1.7; }
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  color: #fff;
+  background: var(--meal-green);
+  border-radius: 50%;
+  font-size: 2.8rem;
+  line-height: 1;
+}
+.start-card-heading { width: 100%; min-height: 160px; }
+.start-card-heading h3 { color: inherit; }
+.start-card-content { display: flex; flex-direction: column; flex: 1; }
+.price-item { height: 100%; display: flex; flex-direction: column; }
+.start-features { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+.start-features li { display: flex; gap: .6rem; margin-bottom: 1rem; }
+.start-features span { color: var(--meal-green); }
+.start-card-content .btn { align-self: center; margin-top: auto; }
+.footer { background: var(--meal-soft-green); }
+.footer .footer-item a:hover { letter-spacing: normal; }
+.footer .footer-item p.footer-note { font-size: .85rem; line-height: 1.6; }
+.copyright a { color: #f2bf92; }
+.copyright a:hover { color: #fff; }
+.back-to-top { font-size: 1.5rem; }
+
+@media (max-width: 991.98px) {
+  .hero-header { padding-top: 65px; padding-bottom: 65px; }
+  .hero-header .rotate-img img { margin-top: 0; }
+  .hero-header .col-lg-6:last-child { max-width: 550px; margin-inline: auto; }
+  .offer { margin-top: 0; }
+  .RotateMoveLeft, .RotateMoveRight { animation: none; }
+  .offer .col-lg-6:first-child, .FAQ .col-lg-6:last-child { max-width: 520px; margin-inline: auto; }
+}
+@media (max-width: 575.98px) {
+  .landing-bar { padding: .4rem 0; }
+  .landing-brand { font-size: .9rem; gap: .3rem; }
+  .landing-app-link { font-size: .8rem; }
+  .hero-header { padding-inline: 1.25rem !important; padding-top: 45px; }
+  .hero-header .display-4 { font-size: 2.5rem; }
+  .hero-header .fs-4 { font-size: 1.1rem !important; }
+  .container-fluid.py-5 > .container.py-5 { padding-block: 1.5rem !important; }
+  .start-card-content { padding: 2rem !important; }
+  .back-to-top { right: 15px; bottom: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
