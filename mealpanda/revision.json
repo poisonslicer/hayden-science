@@ -1,7 +1,7 @@
 {
   "source_repository": "poisonslicer/meal-panda-local",
-  "source_commit": "f6e75a7175b3c4ac29edef93d7f4bc1b1bfca7c3",
+  "source_commit": "9a9fadf820acfe822db453507d8fbfb70aa125b8",
   "base_path": "/mealpanda/",
   "api": "https://meal-panda.onrender.com",
-  "built_at_utc": "2026-10-11T02:39:01.900459+00:00"
+  "built_at_utc": "2026-10-11T20:08:39+00:00"
 }
