@@ -1,0 +1,145 @@
+1
+00:00:00,099 --> 00:00:02,564
+Hey, my name is Hayden Stegall and welcome
+
+2
+00:00:02,579 --> 00:00:03,239
+to the lab.
+
+3
+00:00:03,359 --> 00:00:06,039
+So I'm a PhD student at Rice University.
+
+4
+00:00:06,133 --> 00:00:08,198
+So what I do is I design proteins
+
+5
+00:00:08,213 --> 00:00:11,118
+that have never existed before in nature and
+
+6
+00:00:11,133 --> 00:00:13,958
+I design them to basically make bacteria and
+
+7
+00:00:13,973 --> 00:00:15,031
+make more drugs.
+
+8
+00:00:15,046 --> 00:00:17,091
+I want to use these bacteria to help
+
+9
+00:00:17,106 --> 00:00:20,106
+treat people with disease more cheaply.
+
+10
+00:00:20,226 --> 00:00:21,951
+I spend about half my time in this
+
+11
+00:00:21,966 --> 00:00:23,991
+lab and the other half working on my
+
+12
+00:00:24,006 --> 00:00:25,766
+computer for computation.
+
+13
+00:00:25,899 --> 00:00:29,324
+I'm really passionate about
+teaching with biochemistry and
+
+14
+00:00:29,339 --> 00:00:29,819
+AI.
+
+15
+00:00:29,913 --> 00:00:32,138
+The people who know AI will do really
+
+16
+00:00:32,153 --> 00:00:32,533
+well.
+
+17
+00:00:32,606 --> 00:00:34,491
+But the people who know AI and something
+
+18
+00:00:34,506 --> 00:00:37,373
+else, for example, biology
+maybe, will do really,
+
+19
+00:00:37,493 --> 00:00:37,833
+really well.
+
+20
+00:00:37,949 --> 00:00:39,474
+I really like what I do and I
+
+21
+00:00:39,489 --> 00:00:41,774
+want to help students like you get more
+
+22
+00:00:41,789 --> 00:00:43,549
+involved in real research.
+
+23
+00:00:43,649 --> 00:00:46,174
+It's pretty fun and we can actually have
+
+24
+00:00:46,189 --> 00:00:47,374
+a chance to make the world a better
+
+25
+00:00:47,389 --> 00:00:47,929
+place.
+
+26
+00:00:47,996 --> 00:00:49,681
+To take it to the next level, I
+
+27
+00:00:49,696 --> 00:00:51,421
+feel we need to learn how to do
+
+28
+00:00:51,436 --> 00:00:52,368
+things in the real world.
+
+29
+00:00:52,383 --> 00:00:53,788
+So that's what I can help you to
+
+30
+00:00:53,803 --> 00:00:56,221
+do is maybe do some projects to get
+
+31
+00:00:56,236 --> 00:00:57,056
+your feet wet.
+
+32
+00:00:57,129 --> 00:00:57,829
+Make a splash.
+
+33
+00:00:57,969 --> 00:01:00,294
+Do something that's fun, but maybe other people
+
+34
+00:01:00,309 --> 00:01:01,249
+can use as well.
+
+35
+00:01:01,423 --> 00:01:02,468
+Hope to see you in one of my
+
+36
+00:01:02,483 --> 00:01:02,963
+classes.
